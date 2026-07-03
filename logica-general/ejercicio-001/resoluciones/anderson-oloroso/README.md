@@ -17,19 +17,38 @@
 ### Caso normal
 
 Entrada:
+``` js
+const jugadors = [
+    { nombre: "Marvel", estado: "Dañado", diamantes: 80, nivel: "Maestro" },
+    { nombre: "Dum", estado: "Mejorado", diamantes: 180, nivel: "Leyenda" },
+    { nombre: "Alondra", estado: "Sin daño", diamantes: 170, nivel: "Gran maestro" }
+  ];
+```
 
 Resultado esperado:
+
+diamantes: 180
+estado: "Mejorado"
+nivel: "Leyenda"​
+nombre: "Dum"
 
 ### Caso borde
 
 Entrada:
-
+``` js
+const jugadors = [
+    { nombre: "Marvel", estado: "Dañado", diamantes: 80, nivel: "Maestro" },
+    { nombre: "Dum", estado: "Mejorado", diamantes: 180, nivel: "Leyenda" }
+  ];
+```
 Resultado esperado:
+No hay jugadores que cumplan con las reglas:
+1. Restringir casos por estado.
+2. Diamantes > 150
+3. Nivel leyenda
 
 ## Explicacion final
 
-Escribe aqui por que tu solucion funciona.
+Se trata de filtrar objetos js para poder encontrar los registros que cumplan con los requisitos de ser leyenda, de que no esté dañado, y que sus diamantes sean mayores a 150
 
-## Sugerencia
 
-Convierte cada regla del problema en una condicion clara antes de programar.
