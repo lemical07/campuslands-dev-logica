@@ -1,6 +1,7 @@
 # Resolución: Ranking de Kickboxing
 
 ## Pensamiento Lógico
+
 Para resolver este problema, utilicé una estrategia de **"Bucket Sort" (clasificación por cubetas)**. Primero, distribuí a los atletas en categorías según su peso. Luego, apliqué un ordenamiento interno (`sort`) basado en su experiencia. Esto garantiza un reporte organizado por pesos, facilitando la creación de combates equilibrados.
 
 ## Reglas Aplicadas

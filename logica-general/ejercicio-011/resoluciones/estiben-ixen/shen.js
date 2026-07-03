@@ -28,4 +28,5 @@ const peleadores = [
 ];
 
 const ranking = organizarPeleadores(peleadores);
+
 console.log(JSON.stringify(ranking, null, 2));
