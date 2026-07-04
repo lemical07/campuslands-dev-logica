@@ -23,7 +23,7 @@ Esto nos permite utilizar el método matemático de ordenamiento `.sort((a, b) =
 * **Caso Borde:** Al enviar un arreglo vacío, la validación inicial reacciona inmediatamente retornando `[]`, impidiendo que el método de ordenamiento falle o arroje un error en producción.
 
 ## 6. Cómo ejecutar la solución
-1. Ubícate en tu carpeta personalizada: `resoluciones/nombre-apellido/`.
+1. Ubícate en tu carpeta personalizada: `resoluciones/cleidy-perez/`.
 2. Ejecuta el archivo desde la consola con:
    ```bash
-   node nombre-apellido.js
+   node cleidy-perez.js
