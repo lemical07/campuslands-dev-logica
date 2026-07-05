@@ -4,11 +4,13 @@ function organizarButacasMaraton(peliculas, asientosPorFila) {
     }
 
     const resultados = [];
+
     for (let i = 0; i < peliculas.length; i++) {
         const pelicula = peliculas[i];
         if (pelicula.espectadores < 0) continue;
+
         const espectadoresQueSobran = pelicula.espectadores % asientosPorFila;
-    
+
         const esDivisibleExacto = espectadoresQueSobran === 0;
 
         let estadoFila = "Incompleta";
@@ -30,8 +32,9 @@ function organizarButacasMaraton(peliculas, asientosPorFila) {
     return resultados;
 }
 
+// === PROBAR CASOS ===
 const maratonTerror = [
-    { titulo: "Scream", espectadores: 30 },  
+    { titulo: "Scream", espectadores: 30 }, 
     { titulo: "El Exorcista", espectadores: 34 } 
 ];
 
