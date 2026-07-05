@@ -18,7 +18,7 @@ def flujo_recomendacion_scifi(edad_usuario, prefiere_viajes_tiempo, tiempo_dispo
             }
         else:
             return {
-                "pelicula_recomendada": "Back to the Future",
+                "pelicula_recomendada": "Back to the Future ",
                 "pasos_completados": pasos,
                 "motivo": "Clásico de viajes en el tiempo de duración estándar."
             }
