@@ -3,28 +3,28 @@
 ## Análisis
 
 - **Entrada:**
-  - Una lista de vehículos con la siguiente información:
-    - Propietario.
-    - Vehículo.
-    - Problema reportado.
-    - Nivel de prioridad (Alta, Media o Baja).
+  - Una lista de motos con la siguiente información:
+    - Marca.
+    - Modelo.
+    - Año.
+    - Estado del motor.
 
 - **Proceso:**
-  1. Recorrer la lista de vehículos.
-  2. Evaluar el nivel de prioridad de cada reparación.
-  3. Determinar el orden en que debe atenderse cada vehículo.
-  4. Mostrar un mensaje indicando la prioridad asignada.
+  1. Recorrer la lista de motos.
+  2. Evaluar el estado del motor de cada una.
+  3. Si el estado es **Excelente** o **Bueno**, indicar que la moto es apta para seguir en uso.
+  4. Si el estado es **Regular** o **Malo**, recomendar el cambio del motor.
 
 - **Salida:**
-  - Un mensaje indicando si el vehículo debe atenderse inmediatamente, después de las prioridades altas o puede esperar su turno.
+  - Un mensaje indicando si la moto puede seguir utilizándose o si necesita un cambio de motor.
 
 ---
 
 ## Reglas identificadas
 
-1. Si la prioridad es **Alta**, el vehículo debe atenderse inmediatamente.
-2. Si la prioridad es **Media**, el vehículo debe atenderse después de los casos de prioridad alta.
-3. Si la prioridad es **Baja**, el vehículo puede esperar su turno.
+1. Cada moto debe tener marca, modelo, año y estado del motor.
+2. Si el estado del motor es **Excelente** o **Bueno**, la moto es apta para seguir en uso.
+3. Si el estado del motor es **Regular** o **Malo**, se recomienda cambiar el motor.
 
 ---
 
@@ -36,17 +36,16 @@
 
 ```python
 {
-    "propietario": "Ana López",
-    "vehiculo": "Honda Civic",
-    "problema": "Frenos desgastados",
-    "prioridad": "Alta"
+    "marca": "Honda",
+    "modelo": "CB190R",
+    "estado_motor": "Bueno"
 }
 ```
 
 **Resultado esperado**
 
 ```text
-Honda Civic: Atención inmediata.
+Honda CB190R: Motor apto para seguir en uso.
 ```
 
 ---
@@ -57,29 +56,28 @@ Honda Civic: Atención inmediata.
 
 ```python
 {
-    "propietario": "Luis Gómez",
-    "vehiculo": "Mazda 3",
-    "problema": "Revisión del motor",
-    "prioridad": "Media"
+    "marca": "Suzuki",
+    "modelo": "Gixxer 150",
+    "estado_motor": "Regular"
 }
 ```
 
 **Resultado esperado**
 
 ```text
-Mazda 3: Atender después de las prioridades altas.
+Suzuki Gixxer 150: Se recomienda cambiar el motor.
 ```
 
-> Este es un caso borde porque la prioridad **Media** representa el nivel intermedio entre una reparación urgente y una que puede esperar.
+> Este es un caso borde porque el estado **Regular** representa el límite entre un motor que aún funciona y uno que ya requiere reemplazo.
 
 ---
 
 ## Explicación final
 
-La solución funciona porque recorre la lista de vehículos y analiza la prioridad asignada a cada reparación. Mediante una estructura `if`, `elif` y `else`, determina el orden de atención y muestra un mensaje indicando cuándo debe atenderse cada vehículo. De esta manera se implementa un sistema sencillo de **ordenamiento de prioridades** para un taller mecánico.
+La solución funciona porque recorre la lista de motos y evalúa el estado del motor de cada una mediante una estructura `if...else`. Si el motor está en estado **Excelente** o **Bueno**, la moto puede seguir utilizándose. Si el estado es **Regular** o **Malo**, el programa recomienda cambiar el motor. De esta manera, la decisión se toma aplicando las reglas definidas para el inventario.
 
 ---
 
 ## Sugerencia
 
-Antes de programar, identifica los niveles de prioridad y define qué acción corresponde a cada uno. Luego convierte esas reglas en condiciones utilizando `if`, `elif` y `else` para que el programa pueda decidir automáticamente el orden de atención.
+Convierte cada regla del problema en una condición clara antes de programar. En este reto, la regla principal consiste en evaluar el estado del motor para decidir si la moto puede seguir en funcionamiento o si necesita un cambio de motor.
