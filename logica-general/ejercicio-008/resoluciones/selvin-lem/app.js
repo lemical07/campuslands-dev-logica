@@ -14,7 +14,7 @@ function ejecutarFlujo(items, prioridad, regla) {
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const accion = ACCION_POR_ESTADO[item];
+    const accion = ACCION_POR_ESTADO[item]; 
 
     if (!accion) {
       pasos.push({ paso: i + 1, item, accion: "omitir", detalle: "estado no reconocido." });

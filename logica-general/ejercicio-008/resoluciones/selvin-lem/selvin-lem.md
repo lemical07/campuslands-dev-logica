@@ -15,5 +15,5 @@ node nombre-apellido.js
 
 ## Casos probados
 1. Caso normal: aprobado, pendiente, bloqueado -> avanza, espera, se detiene en el bloqueado.
-2. Caso borde: items vacio -> pasos vacio.
+2. Caso borde: items vacio -> pasos vacio. 
 3. Caso borde: solo aprobados -> avanza en cada paso, nunca se detiene.
