@@ -12,4 +12,4 @@ La regla clave es de riesgo: bloqueado se revisa antes que pendiente, y pendient
 ## Casos probados
 1. Caso normal: ["aprobado", "pendiente", "bloqueado"] → revisar bloqueado.
 2. Caso borde vacío: [] → sin datos.
-3. Caso borde sin riesgo: ["aprobado", "aprobado"] → sin accion.
+3. Caso borde sin riesgo: ["aprobado", "aprobado"] → sin accion. 
