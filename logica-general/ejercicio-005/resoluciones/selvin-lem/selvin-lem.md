@@ -17,4 +17,4 @@ node nombre-apellido.js
 ## Casos probados
 1. Caso normal: ["aprobado", "pendiente", "bloqueado"] -> ["bloqueado", "pendiente", "aprobado"].
 2. Caso borde: items vacio -> ordenados vacio.
-3. Caso borde con empate: dos pendientes y dos bloqueados -> se ordenan por riesgo y se conserva el orden original entre iguales.
+3. Caso borde con empate: dos pendientes y dos bloqueados -> se ordenan por riesgo y se conserva el orden original entre iguales. 
