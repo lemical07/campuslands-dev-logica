@@ -40,4 +40,4 @@ console.log(validarDatos([], "media", ""));
 // caso borde: { valido: false, errores: ['items debe ser un arreglo no vacio.', 'regla debe ser un texto no vacio.'], motivo: 'los datos no cumplen una o mas reglas de validacion.' }
 
 console.log(validarDatos(["aprobado", "lesionado"], "urgente", "chequear"));
-// caso borde: item y prioridad invalidos
+// caso borde: item y prioridad invalidos 

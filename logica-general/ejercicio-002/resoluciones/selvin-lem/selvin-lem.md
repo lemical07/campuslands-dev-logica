@@ -16,4 +16,4 @@ node nombre-apellido.js
 ## Casos probados
 1. Caso normal: items validos, prioridad "alta", regla con texto → valido: true.
 2. Caso borde: items vacio y regla vacia → valido: false, dos errores.
-3. Caso borde: item y prioridad invalidos → valido: false, dos errores.
+3. Caso borde: item y prioridad invalidos → valido: false, dos errores. 
