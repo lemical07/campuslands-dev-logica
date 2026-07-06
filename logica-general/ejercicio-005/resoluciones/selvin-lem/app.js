@@ -29,4 +29,4 @@ console.log(ordenarPorPrioridad([], "alta", "revisar bloqueados primero"));
 // caso borde: { ordenados: [], motivo: 'no hay items para ordenar.' }
 
 console.log(ordenarPorPrioridad(["pendiente", "bloqueado", "pendiente", "bloqueado"], "media", "orden por riesgo"));
-// caso borde con empate: { ordenados: ['bloqueado', 'bloqueado', 'pendiente', 'pendiente'], motivo: '...' }
+// caso borde con empate: { ordenados: ['bloqueado', 'bloqueado', 'pendiente', 'pendiente'], motivo: '...' } 
