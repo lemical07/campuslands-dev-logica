@@ -15,4 +15,4 @@ node nombre-apellido.js
 ## Casos probados
 1. Caso normal: prioridad alta con bloqueado presente -> encontrado bloqueado en su indice.
 2. Caso borde: items vacio -> encontrado null.
-3. Caso borde: solo items aprobados -> encontrado null, ningun item critico.
+3. Caso borde: solo items aprobados -> encontrado null, ningun item critico. 

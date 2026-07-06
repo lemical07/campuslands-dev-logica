@@ -35,4 +35,4 @@ console.log(buscarElemento([], "alta", "revisar bloqueados primero"));
 // caso borde: { encontrado: null, indice: -1, motivo: 'no hay items para buscar.' }
 
 console.log(buscarElemento(["aprobado", "aprobado"], "media", "buscar riesgo"));
-// caso borde: { encontrado: null, indice: -1, motivo: 'no se encontro ningun item critico en la lista.' }
+// caso borde: { encontrado: null, indice: -1, motivo: 'no se encontro ningun item critico en la lista.' } 
