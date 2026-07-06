@@ -26,4 +26,4 @@ console.log(clasificar([], "alta", "revisar bloqueados primero"));
 // caso borde: { accion: 'sin datos', motivo: 'no hay items para evaluar.' }
 
 console.log(clasificar(["aprobado", "aprobado"], "alta", "revisar bloqueados primero"));
-// caso borde sin riesgo: { accion: 'sin accion', motivo: 'ningun item coincide con estados conocidos.' }
+// caso borde sin riesgo: { accion: 'sin accion', motivo: 'ningun item coincide con estados conocidos.' } 
