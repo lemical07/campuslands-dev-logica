@@ -29,4 +29,4 @@ La solución técnica se implementó bajo la premisa de la trazabilidad y la mod
 ## 3. Casos de Prueba Evaluados
 
 1. **Caso Normal (Recorrido Completo):** Un usuario de 25 años que prefiere tramas de tiempo pero solo cuenta con 120 minutos recorre con éxito los 3 pasos del flujo y recibe la película idónea de duración estándar (`Back to the Future`).
-2. **Caso Borde (Interrupción de Flujo):** Un niño de 10 años inicia el proceso. El sistema registra únicamente el **Paso 1** en su historial de flujo, frena las evaluaciones posteriores y le asigna una película apta para su edad.
+2. **Caso Borde (Interrupción de Flujo):** Un niño de 10 años inicia el proceso. El sistema registra únicamente el **Paso 1** en su historial de flujo, frena las evaluaciones  posteriores y le asigna una película apta para su edad.
