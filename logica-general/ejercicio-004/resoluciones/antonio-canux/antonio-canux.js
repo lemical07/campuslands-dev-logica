@@ -1,4 +1,4 @@
-// Ejercicio 024 - Inventario de Motos
+// Ejercicio 004 - Inventario de Motos
 
 function clasificarMotocicleta(estadoMecanico, kilometraje) {
     let categoria = "";
