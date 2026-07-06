@@ -38,4 +38,4 @@ console.log(simularEstados([], "alta", "revisar bloqueados primero"));
 // caso borde: { estadoFinal: [], transiciones: [], motivo: 'no hay items para simular.' }
 
 console.log(simularEstados(["pendiente", "pendiente"], "baja", "resolver pendientes"));
-// caso borde: ambos pendientes pasan a aprobado por prioridad no alta
+// caso borde: ambos pendientes pasan a aprobado por prioridad no alta  

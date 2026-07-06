@@ -16,4 +16,4 @@ node nombre-apellido.js
 ## Casos probados
 1. Caso normal: pendiente con prioridad alta -> transiciona a bloqueado.
 2. Caso borde: items vacio -> sin transiciones.
-3. Caso borde: pendientes con prioridad baja -> todos transicionan a aprobado.
+3. Caso borde: pendientes con prioridad baja -> todos transicionan a aprobado. 
