@@ -37,5 +37,5 @@ console.log(tomarDecision(["aprobado", "pendiente", "bloqueado"], "alta", "revis
 console.log(tomarDecision([], "media", "regla x"));
 // caso borde: { decision: 'sin datos', motivo: 'no hay items para evaluar.' }
 
-console.log(tomarDecision(["pendiente"], "baja", "monitorear"));
+console.log(tomarDecision(["pendiente"], "baja", "monitorear")); 
 // caso borde: { decision: 'monitorear pendiente', motivo: 'pendiente sin prioridad alta solo se monitorea.' }
