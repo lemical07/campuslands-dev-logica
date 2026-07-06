@@ -14,4 +14,4 @@ El objetivo es tomar una decision, no solo clasificar. Combiné dos entradas: el
 ## Casos probados
 1. Caso normal: bloqueado + alta -> accion inmediata.
 2. Caso borde: items vacio -> sin datos.
-3. Caso borde: pendiente + baja -> monitorear pendiente.
+3. Caso borde: pendiente + baja -> monitorear pendiente. 
