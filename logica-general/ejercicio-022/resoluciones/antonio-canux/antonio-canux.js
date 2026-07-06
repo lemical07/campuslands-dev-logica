@@ -1,4 +1,4 @@
-//Ejercicio 002 - Clasificación por reglas
+//Ejercicio 022 - Clasificación por reglas
 
 // Entradas: Recibimos un objeto 'equipo' con su puntuación, diferencia de goles y sanciones.
 function clasificarEquipo(equipo) {
