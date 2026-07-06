@@ -1,40 +1,43 @@
-equipos = [
+juegos = [
     {
-        "nombre": "Dragons",
-        "victorias": 8,
-        "derrotas": 2
+        "nombre": "Valorant",
+        "categoria": "FPS Táctico",
+        "clasificacion": "Competitivo"
     },
     {
-        "nombre": "Titans",
-        "victorias": 4,
-        "derrotas": 6
+        "nombre": "League of Legends",
+        "categoria": "MOBA",
+        "clasificacion": "Competitivo"
     },
     {
-        "nombre": "Phoenix",
-        "victorias": 6,
-        "derrotas": 4
+        "nombre": "Rocket League",
+        "categoria": "Deportes",
+        "clasificacion": "Competitivo"
     },
     {
-        "nombre": "Warriors",
-        "victorias": 3,
-        "derrotas": 7
+        "nombre": "Counter-Strike 2",
+        "categoria": "FPS",
+        "clasificacion": "Competitivo"
     },
     {
-        "nombre": "Legends",
-        "victorias": 9,
-        "derrotas": 1
+        "nombre": "EA Sports FC 25",
+        "categoria": "Deportes",
+        "clasificacion": "Competitivo"
     }
 ]
 
 
-def clasificar_equipos(equipos):
+def mostrar_clasificacion(juegos):
 
-    for equipo in equipos:
+    print("=== CLASIFICACIÓN DE JUEGOS COMPETITIVOS ===")
 
-        if equipo["victorias"] >= 6:
-            print(f'{equipo["nombre"]}: Clasifica a los playoffs.')
-        else:
-            print(f'{equipo["nombre"]}: No clasifica a los playoffs.')
+    for indice, juego in enumerate(juegos, start=1):
+
+        print(f"Juego {indice}")
+        print(f'Nombre: {juego["nombre"]}')
+        print(f'Categoría: {juego["categoria"]}')
+        print(f'Clasificación: {juego["clasificacion"]}')
+        print("------------------------------")
 
 
-clasificar_equipos(equipos)
+mostrar_clasificacion(juegos)

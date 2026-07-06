@@ -3,27 +3,27 @@
 ## Análisis
 
 - **Entrada:**
-  - Una lista de equipos de esports con:
-    - Nombre.
-    - Cantidad de victorias.
-    - Cantidad de derrotas.
+  - Una lista de juegos competitivos con la siguiente información:
+    - Nombre del juego.
+    - Categoría.
+    - Clasificación.
 
 - **Proceso:**
-  1. Recorrer la lista de equipos.
-  2. Evaluar la cantidad de victorias de cada equipo.
-  3. Si el equipo tiene 6 o más victorias, clasifica a los playoffs.
-  4. En caso contrario, queda eliminado.
+  1. Recorrer la lista de juegos.
+  2. Leer la información de cada juego.
+  3. Mostrar el nombre, la categoría y la clasificación de cada uno en el mismo orden en que aparecen.
 
 - **Salida:**
-  - Un mensaje indicando si cada equipo clasifica o no a los playoffs.
+  - Una lista organizada con la información de todos los juegos competitivos.
 
 ---
 
 ## Reglas identificadas
 
-1. Todos los equipos deben tener un nombre, victorias y derrotas.
-2. Un equipo clasifica si tiene **6 o más victorias**.
-3. Si tiene menos de 6 victorias, queda eliminado.
+1. Cada juego debe tener un nombre.
+2. Cada juego debe pertenecer a una categoría.
+3. Cada juego debe mostrar su clasificación.
+4. La información debe mostrarse respetando el orden de la lista.
 
 ---
 
@@ -35,16 +35,19 @@
 
 ```python
 {
-    "nombre": "Phoenix",
-    "victorias": 6,
-    "derrotas": 4
+    "nombre": "Valorant",
+    "categoria": "FPS Táctico",
+    "clasificacion": "Competitivo"
 }
 ```
 
 **Resultado esperado**
 
 ```text
-Phoenix: Clasifica a los playoffs.
+Juego 1
+Nombre: Valorant
+Categoría: FPS Táctico
+Clasificación: Competitivo
 ```
 
 ---
@@ -54,29 +57,25 @@ Phoenix: Clasifica a los playoffs.
 **Entrada**
 
 ```python
-{
-    "nombre": "Titans",
-    "victorias": 5,
-    "derrotas": 5
-}
+juegos = []
 ```
 
 **Resultado esperado**
 
 ```text
-Titans: No clasifica a los playoffs.
+=== CLASIFICACIÓN DE JUEGOS COMPETITIVOS ===
 ```
 
-> Este es un caso borde porque el equipo se encuentra a una victoria del mínimo requerido para clasificar.
+> Este es un caso borde porque la lista de juegos está vacía. El programa debe ejecutarse correctamente sin mostrar errores, aunque no existan juegos para listar.
 
 ---
 
 ## Explicación final
 
-La solución funciona porque recorre la lista de equipos y evalúa la cantidad de victorias de cada uno. Mediante una estructura `if...else`, determina si el equipo alcanza el mínimo de seis victorias para clasificar a los playoffs. Finalmente, muestra un mensaje con el resultado correspondiente para cada equipo.
+La solución funciona porque recorre la lista de juegos competitivos utilizando un ciclo `for` junto con `enumerate()`. En cada iteración lee la información de un juego y la muestra de forma ordenada. Este ejercicio representa un caso de **lectura de instrucciones**, ya que el programa sigue una secuencia de pasos para presentar la información de cada elemento de la lista.
 
 ---
 
 ## Sugerencia
 
-Convierte cada regla del problema en una condición clara antes de programar. En este reto, la regla principal consiste en verificar si el número de victorias es mayor o igual a seis para decidir si un equipo clasifica o no a los playoffs.
+Cuando un problema consista en **leer instrucciones o mostrar información**, organiza los datos en una lista y recórrela de forma secuencial. De esta manera, cada elemento se procesa en el orden correcto y la información se presenta de forma clara y organizada.
