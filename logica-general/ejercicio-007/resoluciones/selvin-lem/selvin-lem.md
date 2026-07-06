@@ -15,4 +15,4 @@ node nombre-apellido.js
 ## Casos probados
 1. Caso normal: items validos, prioridad alta con riesgo real -> sin inconsistencias.
 2. Caso borde: items vacio -> inconsistencia por falta de datos.
-3. Caso borde: duplicado y prioridad alta sin riesgo -> dos inconsistencias detectadas.
+3. Caso borde: duplicado y prioridad alta sin riesgo -> dos inconsistencias detectadas. 

@@ -29,7 +29,7 @@ function detectarInconsistencias(items, prioridad, regla) {
     motivo: inconsistencias.length === 0
       ? "los datos son consistentes con las reglas del sistema."
       : "se encontraron inconsistencias entre los datos y las reglas del sistema.",
-  };
+  }; 
 }
 
 // pruebas
