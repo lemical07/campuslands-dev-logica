@@ -1,29 +1,29 @@
-# Lógica general 013 - resolución de casos
+# README
 
 ## Análisis
 
 **Entrada:**
 
-* Un arreglo con los participantes de paracaidismo que contiene su nombre, edad, peso y si tienen certificado médico.
+* Un arreglo con los paracaidistas y la distancia recorrida en su salto.
 
 **Proceso:**
 
-* Recorrer la lista de participantes.
-* Verificar que cada uno cumpla con las reglas para realizar el salto.
-* Contar cuántos participantes fueron aprobados.
+* Recorrer la lista de saltos.
+* Sumar las distancias.
+* Calcular el promedio.
+* Verificar si cada distancia es suficiente.
 
 **Salida:**
 
-* Mostrar si cada participante puede o no realizar el salto.
-* Mostrar el total de participantes aprobados.
+* Mostrar si cada paracaidista cumplió la distancia.
+* Mostrar la distancia total y el promedio.
 
 ## Reglas identificadas
 
-* Si no hay participantes, mostrar un mensaje.
-* El participante debe tener **18 años o más**.
-* El participante debe pesar **90 kg o menos**.
-* Debe contar con **certificado médico**.
-* Si cumple todas las condiciones, puede realizar el salto.
+* Si no hay saltos, mostrar un mensaje.
+* Una distancia de **1000 metros o más** se considera suficiente.
+* Calcular la distancia total.
+* Calcular el promedio de las distancias.
 
 ## Pruebas
 
@@ -31,16 +31,17 @@
 
 **Entrada:**
 
-* Juan: 22 años, 75 kg, certificado médico.
-* María: 17 años, 60 kg, certificado médico.
-* Carlos: 30 años, 95 kg, sin certificado médico.
-* Ana: 25 años, 68 kg, certificado médico.
+* Juan: 1200 m
+* María: 950 m
+* Carlos: 1500 m
 
 **Resultado esperado:**
 
-* Juan y Ana pueden realizar el salto.
-* María y Carlos no pueden realizar el salto.
-* Total de aprobados: 2.
+* Juan: Distancia suficiente.
+* María: Distancia insuficiente.
+* Carlos: Distancia suficiente.
+* Distancia total: 3650 m.
+* Promedio: 1216.67 m.
 
 ### Caso borde
 
@@ -50,8 +51,8 @@
 
 **Resultado esperado:**
 
-* Mostrar el mensaje: "No hay participantes registrados."
+* Mostrar el mensaje: "No hay saltos registrados."
 
 ## Explicación final
 
-La solución funciona porque recorre todos los participantes, verifica que cada uno cumpla las reglas establecidas y cuenta cuántos fueron aprobados. Al finalizar, muestra el resultado de cada participante y el total de personas que pueden realizar el salto.
+La solución funciona porque recorre todos los saltos, suma las distancias, calcula el promedio y verifica si cada paracaidista alcanzó la distancia mínima establecida. Al finalizar, muestra el total y el promedio de las distancias.

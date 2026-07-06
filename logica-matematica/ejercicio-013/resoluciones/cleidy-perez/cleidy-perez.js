@@ -1,33 +1,34 @@
-const participantes = [
-    { id: 1, nombre: "Juan", edad: 22, peso: 75, certificadoMedico: true },
-    { id: 2, nombre: "María", edad: 17, peso: 60, certificadoMedico: true },
-    { id: 3, nombre: "Carlos", edad: 30, peso: 95, certificadoMedico: false },
-    { id: 4, nombre: "Ana", edad: 25, peso: 68, certificadoMedico: true }
+const saltos = [
+    { id: 1, paracaidista: "Juan", distancia: 1200 },
+    { id: 2, paracaidista: "María", distancia: 950 },
+    { id: 3, paracaidista: "Carlos", distancia: 1500 }
 ];
 
-function evaluarSalto(participantes) {
-    if (!participantes || participantes.length === 0) {
-        console.log("No hay participantes registrados.");
+function calcularDistancia(saltos) {
+
+    if (!saltos || saltos.length === 0) {
+        console.log("No hay saltos registrados.");
         return;
     }
-    let aprobados = 0;
-    for (let i = 0; i < participantes.length; i++) {
 
-        console.log(`Participante: ${participantes[i].nombre}`);
-        if (
-            participantes[i].edad >= 18 &&
-            participantes[i].peso <= 90 &&
-            participantes[i].certificadoMedico
-        ) {
-            console.log("Puede realizar el salto.");
-            aprobados++;
+    let distanciaTotal = 0;
+
+    for (let i = 0; i < saltos.length; i++) {
+
+        distanciaTotal += saltos[i].distancia;
+
+        if (saltos[i].distancia >= 1000) {
+            console.log(`${saltos[i].paracaidista}: Distancia suficiente`);
         } else {
-            console.log("No puede realizar el salto.");
+            console.log(`${saltos[i].paracaidista}: Distancia insuficiente`);
         }
-
-        console.log("---------------------");
     }
-    console.log("Total de participantes aprobados:", aprobados);
+
+    let promedio = distanciaTotal / saltos.length;
+
+    console.log("----------------------");
+    console.log("Distancia total:", distanciaTotal, "metros");
+    console.log("Promedio:", promedio.toFixed(2), "metros");
 }
 
-evaluarSalto(participantes);
+calcularDistancia(saltos);
