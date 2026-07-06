@@ -1,4 +1,6 @@
-# Plantilla de solucion
+# Ejercicio 021 - Clasificación por reglas
+
+**Camper:** Antonio Canux
 
 ## Analisis
 

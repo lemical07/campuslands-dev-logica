@@ -1,4 +1,4 @@
-//Ejercicio 001 - Clasificación por reglas
+//Ejercicio 021 - Clasificación por reglas
 
 // Entradas: Recibimos un objeto 'jugador' cons sus respectivos datos
 function evaluarMatchmaking(jugador) {
