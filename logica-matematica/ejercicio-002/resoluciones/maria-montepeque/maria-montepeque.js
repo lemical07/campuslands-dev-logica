@@ -1,6 +1,7 @@
 //Ejercicio 002: Porcentajes y Proporciones - Ranking de Fútbol Sala
 
 function calcularRendimientoFutbolSala(partidosJugados, partidosGanados, partidosEmpatados) {
+    
     // 1. Casteo Defensivo y Normalización Absoluta de tipos
     const jugados = Number(partidosJugados);
     const ganados = Number(partidosGanados);
