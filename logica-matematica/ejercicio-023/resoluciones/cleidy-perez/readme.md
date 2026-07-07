@@ -1,29 +1,32 @@
-# Lógica General 023 - Toma de decisiones
+# Lógica Matemáticas 023 - promedios y medianas
 
 ## Entrada:
-Un arreglo con los equipos del torneo y la cantidad de puntos obtenidos.
+Un arreglo con los equipos del torneo y los puntos obtenidos por cada uno.
 
 ## Proceso:
-Se valida que el arreglo tenga datos. Luego se recorre cada equipo y, mediante condiciones, se determina si clasifica directamente, va al repechaje o queda eliminado según sus puntos.
+Se valida que el arreglo tenga datos. Luego se suman los puntos de todos los equipos para calcular el promedio. Después se ordenan los puntos de menor a mayor para obtener la mediana según la cantidad de equipos.
 
 ## Salida:
-- Mensaje indicando el resultado de cada equipo en el torneo.
+- Promedio de puntos del torneo.
+- Mediana de los puntos del torneo.
 
 # Reglas identificadas
 
-- Si el equipo tiene 10 puntos o más, clasifica directamente.
-- Si tiene entre 7 y 9 puntos, va al repechaje.
-- Si tiene menos de 7 puntos, queda eliminado.
+- El arreglo debe contener al menos un equipo.
+- El promedio se obtiene dividiendo la suma de los puntos entre la cantidad de equipos.
+- La mediana se calcula con los puntos ordenados.
+- Si la cantidad de equipos es impar, la mediana es el valor central.
+- Si la cantidad de equipos es par, la mediana es el promedio de los dos valores centrales.
 
 # Pruebas
 
 ## Caso normal
 
 ### Entrada:
-Un arreglo con cuatro equipos y diferentes cantidades de puntos.
+Un arreglo con cinco equipos y sus respectivos puntos.
 
 ### Resultado esperado:
-Se muestra si cada equipo clasifica directamente, va al repechaje o queda eliminado.
+Se muestra el promedio y la mediana de los puntos del torneo.
 
 ## Caso borde
 
@@ -35,8 +38,8 @@ Se muestra el mensaje **"No hay equipos registrados."**
 
 # Explicación final
 
-La solución funciona porque primero verifica que existan equipos registrados. Después recorre el arreglo y utiliza estructuras condicionales para tomar una decisión según los puntos obtenidos por cada equipo. Finalmente, muestra el resultado correspondiente para cada uno.
+La solución funciona porque primero verifica que existan equipos registrados. Después utiliza un acumulador para sumar los puntos y calcular el promedio. Finalmente, ordena los puntos para encontrar la mediana, considerando si la cantidad de equipos es par o impar.
 
 # Sugerencia
 
-Define primero las reglas del torneo y conviértelas en condiciones (`if`, `else if` y `else`) antes de programar la solución.
+Antes de calcular la mediana, ordena siempre los datos de menor a mayor para obtener el valor central correctamente.
