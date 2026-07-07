@@ -9,4 +9,4 @@ Deje programado el candado perimetral con `!items?.length` para capturar de inme
 ### Como ejecutar la solucion
 1. Abrir la consola de comandos en la ruta de este ejercicio.
 2. Tirar el comando de ejecucion `node joseph-ramirez.js`.
-3. En la terminal se listaran las tres pruebas configuradas: la de la guia para validar el retorno exacto, la simulacion de datos corruptos y mi prueba automatizada de reproduccion limpia
+3. En la terminal se listaran las tres pruebas configuradas: la de la guia para validar el retorno exacto, la simulacion de datos corruptos y mi prueba automatizada de reproduccion limpia.

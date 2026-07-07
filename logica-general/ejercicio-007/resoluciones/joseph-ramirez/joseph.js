@@ -22,3 +22,4 @@ console.log(detectarInconsistenciasPlaylist(null, "baja", ""));
 
 console.log("\n--- Prueba 3: Caso Propio (Playlist sin Conflictos de Indexación) ---");
 console.log(detectarInconsistenciasPlaylist(["aprobado", "aprobado"], "media", "reproducir aleatorio"));
+
