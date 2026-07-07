@@ -15,7 +15,7 @@ def analizarRendimientoEsports(bajasPorPartida):
 
     # 2. Calcular la Mediana (Requiere ordenar los datos primero)
     bajasOrdenadas = sorted(bajasPorPartida)
-    mitad = totalPartidas // i
+    mitad = totalPartidas//"i" 
 
     if totalPartidas % 2 != 0:
         # Longitud impar: se toma el elemento central
