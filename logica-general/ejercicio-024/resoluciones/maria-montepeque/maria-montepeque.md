@@ -1,80 +1,79 @@
-# Ejercicio 024: Motor de Control de Inventario y Seguridad (Concesionario de Motocicletas)
+# Ejercicio 024: Motor de Auditoría y Estabilidad de Inventario de Motos
 
 ## Análisis del Problema
 
-El objetivo es desarrollar un componente de software para la gestión de inventario de un concesionario y taller de motocicletas que evalúe el estado físico y legal de los vehículos en stock, aplicando prioridades dinámicas para detener o desviar el flujo de venta ante cualquier bloqueo técnico, avería o restricción legal.
+El objetivo es desarrollar un componente de software para la gestión logística de bodegas que procese el stock diario de unidades. El sistema determinará la volatilidad del inventario mediante el cálculo del rango entre valores máximos y mínimos, clasificará el estado operativo de la bodega y aplicará programación defensiva para garantizar la integridad de los datos financieros.
 
 * **Entrada:** Un objeto contenedor con la siguiente firma:
-    * `motos`: Array de Strings (Estados del stock de vehículos: `"disponible"`, `"pendiente"`, `"bloqueado"`).
-    * `prioridad`: String (Nivel de prisa comercial o del taller: `"alta"`, `"media"`, `"baja"`).
-    * `criterio`: String (Instrucción específica o directiva dada al sistema, ej: `"revisar bloqueados primero"`).
-* **Proceso:** 1. Validar inicialmente mediante cláusulas de guarda que la lista no esté vacía ni los strings de control falten para mitigar excepciones de lectura en memoria.
-    2. Estandarizar todas las cadenas de texto recibidas a minúsculas (`.toLowerCase()`) para asegurar un procesamiento seguro y tolerante a fallos de formato.
-    3. Evaluar de manera jerárquica las condiciones críticas del inventario (regla de bloqueo activa + elemento `"bloqueado"` real).
-    4. Resolver flujos secundarios como despachos urgentes pendientes o ventas libres directas en piso empleando la técnica de *Early Returns*.
-* **Salida:** Un objeto con la estructura estricta: `{ accion: string, motivo: string }`.
+    * `stockDiario`: Array de números (Cantidad de motos registradas diariamente).
+* **Proceso:** 1. Validar la existencia y integridad del arreglo mediante cláusulas de guarda para evitar excepciones.
+    2. Filtrar o limpiar anomalías (valores negativos) para asegurar la consistencia logística.
+    3. Calcular los valores extremos (`stockMaximo` y `stockMinimo`) mediante métodos de reducción lineal ($O(n)$).
+    4. Determinar la amplitud de variación (rango) para evaluar la estabilidad del inventario.
+    5. Clasificar el comportamiento del stock bajo una escala cualitativa preestablecida.
+* **Salida:** Un objeto con la estructura estricta: `{ stockMaximo: number, stockMinimo: number, rangoFluctuacion: number, estado: string }`.
 
 ---
 
 ## Reglas de Negocio
 
-1. **Garantía y Seguridad Primero:** Si el `criterio` exige exactamente `"revisar bloqueados primero"` y se encuentra al menos una motocicleta en estado `"bloqueado"` (por avería, papeles incompletos o alertas de fábrica), se interrumpe de inmediato cualquier flujo de venta para mitigar responsabilidades legales devolviendo la acción `"revisar bloqueado"`.
-2. **Desembotellamiento de Reservas:** Si el sistema está libre de bloqueos críticos pero la `prioridad` es `"alta"`, los vehículos en estado `"pendiente"` (apartados o pre-vendidos) se procesan prioritariamente para cumplir con los tiempos de entrega pactados devolviendo la acción `"procesar apartados"`.
-3. **Disponibilidad Comercial Plena:** Si no existen restricciones críticas ni pedidos urgentes pendientes en el lote analizado, las motocicletas en estado `"disponible"` se destinan a flujo de exhibición y venta directa devolviendo la acción `"habilitar venta"`.
-4. **Control de Inventario Vacío (Caso Borde):** Ante la total ausencia de datos de vehículos en el lote de entrada (arreglo vacío), el sistema se protege de forma segura retornando la acción `"pausar asignaciones"`.
+1. **Ecuación de Fluctuación:** El rango de variación se obtiene mediante la diferencia de los valores extremos:
+    $$\text{rango} = \text{stockMaximo} - \text{stockMinimo}$$
+2. **Escala de Estabilidad Logística:**
+    * Rango $> 20$: `"Alta volatilidad"`
+    * Rango $11$ a $20$: `"Fluctuación moderada"`
+    * Rango $\le 10$: `"Inventario estable"`
+3. **Restricción de Integridad (Caso Borde):** Cualquier registro negativo se considera un error de sistema. El arreglo no puede estar vacío; de lo contrario, se debe disparar un reporte de error controlado.
 
 ---
 
 ## Casos de Prueba
 
-### 1. Interrupción por Vehículo Bloqueado (Caso Normal)
+### 1. Auditoría de Inventario con Fluctuación Moderada (Caso Normal)
 * **Entrada:**
     ```json
     {
-      "motos": ["disponible", "pendiente", "bloqueado"],
-      "prioridad": "alta",
-      "criterio": "revisar bloqueados primero"
+      "stockDiario": [5, 12, 8, 25, 10]
     }
     ```
 * **Resultado esperado:**
     ```json
     {
-      "accion": "revisar bloqueado",
-      "motivo": "Se detectaron motocicletas bloqueadas bajo directriz de revisión prioritaria. Flujo comercial detenido por seguridad."
+      "stockMaximo": 25,
+      "stockMinimo": 5,
+      "rangoFluctuacion": 20,
+      "estado": "Fluctuación moderada"
     }
     ```
 
-### 2. Priorización de Entregas y Reservas (Caso Alterno)
+### 2. Auditoría de Inventario Estable (Caso Borde)
 * **Entrada:**
     ```json
     {
-      "motos": ["disponible", "pendiente"],
-      "prioridad": "alta",
-      "criterio": "revisar bloqueados primero"
+      "stockDiario": [10, 10, 10]
     }
     ```
 * **Resultado esperado:**
     ```json
     {
-      "accion": "procesar apartados",
-      "motivo": "Stock libre de bloqueos críticos. Se prioriza el despacho de vehículos en estado pendiente por alta demanda comercial."
+      "stockMaximo": 10,
+      "stockMinimo": 10,
+      "rangoFluctuacion": 0,
+      "estado": "Inventario estable"
     }
     ```
 
-### 3. Activación de Guarda por Lote Vacío (Caso Borde)
+### 3. Activación de Guarda por Estructura Vacía (Caso Borde)
 * **Entrada:**
     ```json
     {
-      "motos": [],
-      "prioridad": "baja",
-      "criterio": "revisar bloqueados primero"
+      "stockDiario": []
     }
     ```
 * **Resultado esperado:**
     ```json
     {
-      "accion": "pausar asignaciones",
-      "motivo": "Ausencia total de unidades evaluables en el lote de inventario recibido. Procesamiento suspendido."
+      "error": "Procesamiento cancelado. El registro de inventario está vacío o es inválido."
     }
     ```
 
@@ -82,15 +81,15 @@ El objetivo es desarrollar un componente de software para la gestión de inventa
 
 ## Arquitectura de la Solución
 
-La solución utiliza el patrón de diseño de Cláusulas de Guarda (*Guard Clauses*) coordinado con retornos anticipados (*Early Returns*) para sanear el flujo de control de la aplicación. Al evaluar y abortar el procesamiento al inicio de la función en caso de colecciones vacías o argumentos inválidos, evitamos el anidamiento innecesario de bloques `if/else` (*Arrow Anti-pattern*). La búsqueda de estados específicos dentro del array aprovecha métodos nativos optimizados del motor V8 de JavaScript, manteniendo una complejidad de tiempo en el peor de los casos de $O(n)$ y una estructura de código limpia, modular y altamente mantenible.
+La solución implementa una arquitectura basada en **Cláusulas de Guarda** para interceptar errores de datos en tiempo de ejecución. La selección de valores extremos se realiza mediante métodos de reducción óptimos ($O(n)$) para garantizar que el rendimiento sea constante incluso con grandes volúmenes de datos históricos. Esta implementación evita el uso excesivo de memoria al operar directamente sobre los valores primitivos del arreglo.
 
 ---
 
 ## Ejecución del Módulo
 
-1. Asegúrate de contar con [Node.js](https://nodejs.org/) instalado en tu estación de trabajo (versión LTS recomendada).
-2. Abre la consola de comandos o terminal en el directorio raíz de este ejercicio.
-3. Ejecuta el script de la solución utilizando el comando:
+1. Asegúrate de contar con [Node.js](https://nodejs.org/) instalado en tu estación de trabajo.
+2. Abre la consola o terminal en el directorio raíz.
+3. Ejecuta el script con el comando:
     ```bash
     node maria-montepeque.js
     ```

@@ -1,83 +1,44 @@
-//Solución Ejercicio 024 - Filtros por condiciones
+//Ejercicio 024: Rangos y máximos en inventario de motos
 
-function filtrarInventarioMotos(motos, prioridad, criterio) {
-    // 1. Casos Borde Estructurales
-    if (!Array.isArray(motos) || motos.length === 0) {
-        return {
-            accion: "ninguna",
-            motivo: "El inventario está vacío o los datos ingresados no son válidos."
-        };
+function analizarInventarioMotos(stockDiario) {
+    // 1. Guardrail: Validación de entrada
+    if (!Array.isArray(stockDiario) || stockDiario.length === 0) {
+        return { estado: "Error", mensaje: "No hay datos de inventario disponibles." };
     }
 
-    const prioridadLimpia = String(prioridad || 'baja').toLowerCase().trim();
-    const criterioLimpio = String(criterio || '').toLowerCase().trim();
+    // 2. Limpieza de datos: Asegurar que todos sean números finitos
+    const dataLimpia = stockDiario
+        .map(n => Number(n))
+        .filter(n => Number.isFinite(n));
 
-    // 2. Indexación Analítica O(N): Mapeo a Set para lookup inmediato O(1)
-    const setMotos = new Set(motos.map(moto => String(moto).toLowerCase().trim()));
-    const tieneBloqueado = setMotos.has("bloqueado");
-    const tienePendiente = setMotos.has("pendiente");
-    const tieneDisponible = setMotos.has("disponible") || setMotos.has("aprobado");
-
-    // 3. Matriz de Decisiones de Seguridad y Logística Vehicular
-    if (tieneBloqueado && (criterioLimpio.includes("bloqueado") || criterioLimpio.includes("mantenimiento"))) {
-        return {
-            accion: "revisar bloqueado",
-            motivo: "La regla prioriza la inspección de motos retenidas o bloqueadas por fallas de seguridad antes de gestionar las ventas."
-        };
+    if (dataLimpia.length === 0) {
+        return { estado: "Error", mensaje: "No se encontraron valores numéricos válidos." };
     }
 
-    if (tieneBloqueado) {
-        return {
-            accion: "auditar lote",
-            motivo: "Alerta de inventario: Existen motocicletas retenidas en el lote bajo análisis. Se requiere una auditoría manual por seguridad."
-        };
+    // 3. Cálculo de extremos usando reduce para evitar errores de stack en arreglos gigantes
+    const stockMaximo = dataLimpia.reduce((max, val) => (val > max ? val : max), -Infinity);
+    const stockMinimo = dataLimpia.reduce((min, val) => (val < min ? val : min), Infinity);
+
+    // 4. Cálculo del rango y estado
+    const rangoFluctuacion = stockMaximo - stockMinimo;
+
+    let estado = "";
+    if (rangoFluctuacion > 20) {
+        estado = "Alta volatilidad (Revisar logística)";
+    } else if (rangoFluctuacion > 10) {
+        estado = "Fluctuación moderada";
+    } else {
+        estado = "Inventario estable";
     }
 
-    // Regla 2: Alta demanda o reservas en espera
-    if (prioridadLimpia === "alta" && tienePendiente) {
-        return {
-            accion: "despachar pedido pendiente",
-            motivo: "La alta prioridad del sistema exige liberar los vehículos con asignaciones pendientes con urgencia."
-        };
-    }
-
-    // Regla 3: Flujo ordinario de ventas
-    if (tieneDisponible) {
-        return {
-            accion: "procesar venta disponible",
-            motivo: "La motocicleta se encuentra aprobada y lista para exhibición o entrega inmediata."
-        };
-    }
-
-    // 4. Estado por defecto de contingencia general
     return {
-        accion: "auditar lote",
-        motivo: "Los estados del inventario actual requieren una revisión manual por el supervisor."
+        stockMaximo,
+        stockMinimo,
+        rangoFluctuacion,
+        estado
     };
 }
 
-console.log("--- EJECUTANDO PRUEBAS - EJERCICIO 024 ---");
-
-const pruebas = [
-    {
-        tipo: "Caso Normal (Guía) - Prioridad de Mantenimiento",
-        motos: ["disponible", "pendiente", "bloqueado"], prioridad: "alta", criterio: "revisar bloqueados primero"
-    },
-    {
-        tipo: "Caso Inseguro Corregido - Intento de evasión de Bloqueo Crítico",
-        motos: ["disponible", "bloqueado"], prioridad: "alta", criterio: "priorizar entregas"
-    },
-    {
-        tipo: "Caso Propio - Despacho de Pendientes Limpios",
-        motos: ["disponible", "pendiente"], prioridad: "alta", criterio: "priorizar entregas"
-    },
-    {
-        tipo: "Caso Borde - Colección Estructural Vacía",
-        motos: [], prioridad: "baja", criterio: "revisar bloqueados primero"
-    }
-];
-
-pruebas.forEach(({ tipo, motos, prioridad, criterio }) => {
-    console.log(`\n[${tipo}]`);
-    console.log(JSON.stringify(filtrarInventarioMotos(motos, prioridad, criterio), null, 2));
-});
+console.log(analizarInventarioMotos([5, 12, 8, 25, 10])); 
+console.log(analizarInventarioMotos([10, 11, 10, 12]));  
+console.log(analizarInventarioMotos([5, "25", null, 10]));
