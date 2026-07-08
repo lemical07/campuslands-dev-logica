@@ -22,3 +22,4 @@ console.log(resolverCasoParacaidismo(null, "baja", ""));
 
 print("\n--- Prueba 3: Caso Propio (Plan de Vuelo y Apertura Despejado) ---");
 console.log(resolverCasoParacaidismo(["aprobado", "aprobado"], "media", "verificar clima"));
+

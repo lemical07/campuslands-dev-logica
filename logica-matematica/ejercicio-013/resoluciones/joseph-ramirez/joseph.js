@@ -24,4 +24,5 @@ console.log("\n--- Prueba 2: Caso Borde (Colecciones vacías) ---");
 console.log(calcularDistanciaParacaidismo([], 0, 0));
 
 console.log("\n--- Prueba 3: Caso Propio (Precisión de Aterrizaje Drop Zone) ---");
-console.log(calcularDistanciaParacaidismo([20, 22, 26, 28], 5, 2)); 
+console.log(calcularDistanciaParacaidismo([20, 22, 26, 28], 5, 2));  
+
