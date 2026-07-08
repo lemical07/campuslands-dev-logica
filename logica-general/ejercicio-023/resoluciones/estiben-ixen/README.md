@@ -1,5 +1,3 @@
-# Plantilla de solucion
-
 ## Analisis
 
 - Entrada: Un objeto con `puntuacion` (número), `estadoServidor` (string) y `erroresCriticos` (número).
