@@ -42,4 +42,4 @@ console.log(prueba1);
 const prueba2 = tallerMecanico("P456XYZ", 0);
 
 console.log("\nCaso Borde");
-console.log(prueba2);v
+
