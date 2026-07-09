@@ -10,7 +10,7 @@ function organizarCategoriasKickboxing(peleadores) {
         else categoria = "Pesado";
         
         return { ...p, categoria };
-    });
+});
 
     const nivelados = clasificados.sort((a, b) => b.experiencia - a.experiencia);
 
