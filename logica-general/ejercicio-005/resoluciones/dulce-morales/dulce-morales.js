@@ -1,41 +1,43 @@
-function controlarTemperaturaActuador(actuador) {
-    // Caso borde: Datos nulos o temperaturas inferiores al cero absoluto físico
-    if (!actuador || actuador.temperaturaActual < -273.15 || actuador.limiteSeguro < -273.15) {
+function evaluarEficienciaEnergetica(dispositivo) {
+    // Caso borde: Datos nulos, horas negativas o superiores a un día real (24h)
+    if (!dispositivo || dispositivo.horasEncendido < 0 || dispositivo.horasEncendido > 24 || dispositivo.consumoWatts < 0) {
         return {
-            cicloVentiladorPWM: 0,
-            estadoTermico: "falla_hardware_sensor",
-            apagadoEmergencia: false
+            consumoDiarioWh: 0,
+            eficienciaNivel: "error_telemetria",
+            requiereOptimizacion: false
         };
     }
 
-    const { temperaturaActual, limiteSeguro } = actuador;
+    const { consumoWatts, horasEncendido } = dispositivo;
 
-    // Proceso: Evaluar regla de negocio para mitigación térmica extrema
-    if (temperaturaActual > limiteSeguro) {
+    // Proceso: Calcular consumo diario acumulado
+    const consumoDiarioWh = consumoWatts * horasEncendido;
+
+    // Evaluar regla de negocio para consumo crítico
+    if (consumoDiarioWh > 1200) {
         return {
-            cicloVentiladorPWM: 100,
-            estadoTermico: "critico",
-            apagadoEmergencia: true
+            consumoDiarioWh: consumoDiarioWh,
+            eficienciaNivel: "alta_demanda",
+            requiereOptimizacion: true
         };
     }
 
-    // Estado estable: Si no supera el límite, opera de forma regular a mitad de potencia
     return {
-        cicloVentiladorPWM: 50,
-        estadoTermico: "nominal",
-        apagadoEmergencia: false
+        consumoDiarioWh: consumoDiarioWh,
+        eficienciaNivel: "eficiente",
+        requiereOptimizacion: false
     };
 }
 
 // Ejecución de pruebas para verificar consola
-console.log(controlarTemperaturaActuador({
-    componente: "Driver de Motores L298N",
-    temperaturaActual: 85,
-    limiteSeguro: 70
+console.log(evaluarEficienciaEnergetica({
+    nombre: "Servidor IoT ESP32",
+    consumoWatts: 60,
+    horasEncendido: 24
 })); // Caso Normal
 
-console.log(controlarTemperaturaActuador({
-    componente: "Motor Paso a Paso Nema 17",
-    temperaturaActual: -300,
-    limiteSeguro: 60
+console.log(evaluarEficienciaEnergetica({
+    nombre: "Foco Inteligente",
+    consumoWatts: 12,
+    horasEncendido: -5
 })); // Caso Borde
