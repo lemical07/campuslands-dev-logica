@@ -11,35 +11,57 @@ Construir una solución interactiva por consola que evalúe las especificaciones
 
 ---
 
-## 🧠 Arquitectura de la Solución y Flujo Lógico
+# Plantilla de solución
 
-El programa fue implementado en Python bajo un enfoque de **evaluación predictiva**. En lugar de usar múltiples condicionales anidados complejos, se optó por aislar las reglas de negocio en variables booleanas independientes para luego cruzarlas en una única compuerta lógica.
+## Análisis
 
----
+- **Entrada:**
+  - `marca`: Cadena de texto (`str`) que representa el fabricante de la moto, normalizado con el método `.capitalize()`.
+  - `cilindrada`: Valor numérico entero (`int`) que almacena la potencia del motor en centímetros cúbicos (CC).
+  - `precio`: Valor numérico decimal de punto flotante (`float`) para la gestión del costo en Quetzales.
+  - `tipo`: Cadena de texto (`str`) descriptiva sobre la categoría de uso de la unidad (Trabajo / Deportiva / Scooter).
+- **Proceso:**
+  - **Asignación Booleana de Reglas:** El sistema evalúa de forma aislada e independiente tres variables lógicas basadas en criterios de inclusión (`or`) y restricción matemática de rangos (`and`).
+  - **Conector Restrictivo Total:** Una compuerta condicional simple (`if-else`) unifica las tres banderas mediante operadores `and`. Si una de las premisas falla, todo el sistema de filtrado colapsa y descarta el elemento.
+- **Salida:**
+  - `resultado_filtro`: Cadena de texto (`str`) que declara de manera binaria si la motocicleta fue aprobada o rechazada por el sistema.
+  - `diagnostico`: Cadena de texto (`str`) que detalla los argumentos técnicos del éxito o la causa probable del rechazo.
 
-### 1. Variables de Captura (Inputs)
-Para describir el artículo del inventario, el sistema recopila de forma interactiva diferentes tipos de datos nativos:
-* **`marca`**: Cadena de texto (`str`) estandarizada automáticamente con el método `.capitalize()`.
-* **`cilindrada`**: Valor numérico entero (`int`) que representa la potencia en centímetros cúbicos (CC).
-* **`precio`**: Valor numérico decimal de punto flotante (`float`) para la gestión monetaria exacta.
-* **`tipo`**: Cadena de texto (`str`) descriptiva sobre la categoría de uso de la motocicleta.
+## Reglas identificadas
 
----
+1. **Inclusión de Marca Preferencial (`or`):** La propiedad de marca debe coincidir exactamente con `"Honda"` o con `"Yamaha"` para considerarse válida dentro de los parámetros del cliente.
+2. **Espectro de Cilindrada Urbano (`and`):** El motor debe cumplir estrictamente con el rango de ser mayor o igual a 125 CC **Y** menor o igual a 250 CC de forma simultánea.
+3. **Tope Presupuestario Comercial:** El costo total de la unidad no puede exceder el límite financiero lineal establecido (debe ser menor o igual a Q25,000.00).
 
-### 2. Capa de Reglas de Negocio (Filtros Condicionales)
-La lógica del buscador se desglosó en tres criterios matemáticos específicos, combinando operadores de comparación y operadores lógicos:
+## Pruebas
 
-* **Inclusión de Marca (`or`):** Permite flexibilidad al validar si la propiedad coincide con `"Honda"` **O** `"Yamaha"`. Si cualquiera es verdadera, el filtro de marca se aprueba.
-  $$\text{condicion\_marca} = (\text{marca} == \text{"Honda"} \lor \text{marca} == \text{"Yamaha"})$$
-* **Rango de Cilindrada (`and`):** Restringe estrictamente que el motor esté en un espectro urbano, obligando a que sea mayor o igual a 125 CC **Y** menor o igual a 250 CC de forma simultánea.
-  $$\text{condicion\_cilindrada} = (\text{cilindrada} \ge 125 \land \text{cilindrada} \le 250)$$
-* **Límite Presupuestario:** Filtro lineal que descarta cualquier artículo que supere el tope de costo establecido ($\le 25000$).
+### Caso normal
 
----
+- **Entrada:**
+  - `marca`: honda
+  - `cilindrada`: 150
+  - `precio`: 18500
+  - `tipo`: trabajo
+- **Resultado esperado:**
+  - `Estado del Filtro:  MOTO APROBADA: Cumple con todos los requisitos del cliente.`
+  - `Diagnóstico: La moto Honda de 150CC se ajusta al presupuesto y cilindraje esperado.`
 
-### 3. Procesamiento y Conector Lógico Restrictivo
-Para la toma de decisión final, el flujo condicional ejecuta una operación distributiva estricta utilizando el conector **`and`**:
+### Caso borde
 
-```python
-if condicion_marca and condicion_cilindrada and condicion_precio:
-    # El artículo cumple con el 100% de las expectativas
+- **Entrada:**
+  - `marca`: yamaha
+  - `cilindrada`: 250
+  - `precio`: 25000
+  - `tipo`: deportiva
+- **Resultado esperado:**
+  - `Estado del Filtro:  MOTO APROBADA: Cumple con todos los requisitos del cliente.`
+  - `Diagnóstico: La moto Yamaha de 250CC se ajusta al presupuesto y cilindraje esperado.`
+  *(Muestra efectividad en el límite superior exacto de los operadores relacionales `<=` y `>=`).*
+
+## Explicación final
+
+Mi solución funciona porque descentraliza el procesamiento lógico de los condicionales. En lugar de encadenar una estructura gigante y anidada dentro del `if`, el sistema almacena las reglas de negocio de manera atómica en variables booleanas intermedias (`condicion_marca`, `condicion_cilindrada` y `condicion_precio`). Al momento de aplicar la condicional definitiva, el operador restrictivo `and` evalúa estas banderas en un solo paso de CPU. Si el artículo no cumple con el 100% de los requisitos, el flujo es interceptado limpiamente por el bloque de contingencia `else`, garantizando un reporte de inventario seguro, legible y libre de falsos positivos.
+
+## Sugerencia
+
+Convierte cada regla del problema en una condición clara antes de programar.

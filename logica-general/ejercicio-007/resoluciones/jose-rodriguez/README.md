@@ -11,35 +11,64 @@ Construir un script interactivo por interfaz de línea de comandos (CLI) capaz d
 
 ---
 
-## 🧠 Arquitectura de la Solución y Flujo Lógico
+# Plantilla de solucion
 
-El programa fue desarrollado en Python bajo el principio de **aislamiento de banderas de error (Error Flags)**. El sistema no procesa las condiciones directamente en el flujo principal del control; primero ejecuta la aritmética y enciende interruptores de desigualdad (`!=`) para alimentar un motor de diagnóstico jerárquico.
+## Analisis
 
-### 1. Variables del Sistema de Audio (Inputs)
-* **`nombre_playlist`**: Identificador cualitativo de la lista (`str`).
-* **`cantidad_reportada`**: Volumen de pistas declarado en el encabezado (`int`).
-* **`duracion_reportada`**: Tiempo total acumulado declarado en segundos (`int`).
-* **`cancion_[1-3]_segundos`**: Variables atómicas que representan la duración discreta de cada pista (`int`).
+- **Entrada:**
+  - `nombre_playlist`: Cadena de texto (`str`) que representa el identificador cualitativo de la lista.
+  - `cantidad_reportada`: Valor numérico entero (`int`) que indica el volumen de pistas declarado en el encabezado.
+  - `duracion_reportada`: Valor numérico entero (`int`) con el tiempo total acumulado declarado en segundos.
+  - `cancion_1_segundos`, `cancion_2_segundos`, `cancion_3_segundos`: Variables numéricas enteras (`int`) que capturan la duración discreta de cada pista ingresada para el desglose.
+- **Proceso:**
+  - **Aritmética de Control:** El programa calcula la duración real sumando las pistas individuales y define la cantidad fija de control (`cantidad_real = 3`).
+  - **Aislamiento de Banderas de Error:** Se activan interruptores booleanos (`inconsistencia_contador`, `inconsistencia_tiempo`) usando el operador de desigualdad (`!=`) para identificar discrepancias frente a los metadatos globales.
+  - **Matriz de Diagnóstico:** Un bloque jerárquico `if-elif-else` evalúa de forma descendente las banderas para aislar si el fallo es crítico, puramente numérico o de desfase temporal.
+- **Salida:**
+  - `estado_auditoria`: Cadena de texto (`str`) que almacena el estatus de la integridad del archivo (Crítico, Advertencia o Sincronizada).
+  - `dictamen`: Cadena de texto (`str`) con la justificación técnica del diagnóstico emitido por el sistema.
 
-### 2. Reglas de Validación de Integridad (Auditing Rules)
-El sistema evalúa de forma paralela dos leyes fundamentales de consistencia indexando los resultados en variables de tipo booleano:
+## Reglas identificadas
 
-* **Consistencia del Contador:** Verifica si la cantidad declarada difiere de la cantidad física real de elementos inyectados en el buffer de datos ($3$).
-  $$\text{inconsistencia\_contador} = (\text{cantidad\_reportada} \neq \text{cantidad\_real})$$
-* **Consistencia Cronológica:** Aplica una función de agregación (suma) sobre el desglose de canciones y contrasta si el resultado difiere del tiempo reportado en el encabezado global.
-  $$\text{inconsistencia\_tiempo} = (\text{duracion\_reportada} \neq \sum \text{canciones})$$
+1. **Consistencia del Contador:** El volumen declarado en el encabezado (`cantidad_reportada`) debe ser estrictamente idéntico a la cantidad real física de elementos procesados (`cantidad_real`).
+2. **Consistencia Cronológica:** El tiempo total declarado (`duracion_reportada`) debe coincidir matemáticamente al 100% con la sumatoria lineal de los segundos de cada canción (`duracion_real_calculada`).
+3. **Jerarquía de Aislamiento de Errores:**
+   - Si fallan ambas leyes simultáneamente (`and`), el sistema declara un estado crítico de corrupción.
+   - Si solo falla una de las leyes (`elif`), se aísla de forma específica si el error radica en el contador o en el desfase cronológico.
 
-### 3. Matriz de Diagnóstico Condicional
-A través de un bloque secuencial `if-elif-else`, el sistema analiza las banderas para emitir un dictamen específico por descarte:
-1. **Fallo Simultáneo (`if` compuesto con `and`):** Si ambas banderas operan en `True`, el sistema declara el estado crítico de corrupción total.
-2. **Fallo de Metadatos (`elif` atómico):** Aísla si el error radica puramente en el contador de pistas.
-3. **Fallo de Desfase (`elif` atómico):** Aísla si el error se debe a una discrepancia matemática en los segundos acumulados.
-4. **Estado Óptimo (`else`):** Si ninguna bandera de error fue activada, el sistema valida la sincronización e integridad de la playlist.
+## Pruebas
 
----
+### Caso normal
 
-## 🛠️ Conceptos de Programación Practicados
+- **Entrada:**
+  - `nombre_playlist`: Lo-Fi Study
+  - `cantidad_reportada`: 3
+  - `duracion_reportada`: 600
+  - `cancion_1_segundos`: 200
+  - `cancion_2_segundos`: 250
+  - `cancion_3_segundos`: 150
+- **Resultado esperado:**
+  - `Estado de Integridad: INTEGRIDAD CONFIRMADA: PLAYLIST SINCRONIZADA`
+  - `Dictamen del Sistema: Los metadatos del encabezado y la sumatoria del desglose físico cuadran al 100%.`
 
-* **Operadores de Desigualdad (`!=`):** Uso de comparadores lógicos orientados a la detección temprana de discrepancias en bases de datos.
-* **Funciones de Agregación Aritmética:** Consolidación de sub-métricas numéricas para auditorías cruzadas.
-* **Aislamiento de Diagnósticos:** Estructuración de condicionales jerárquicos capaces de separar causas raíces específicas de un error sistémico.
+### Caso borde
+
+- **Entrada:**
+  - `nombre_playlist`: Synthwave Mix
+  - `cantidad_reportada`: 3
+  - `duracion_reportada`: 500
+  - `cancion_1_segundos`: 200
+  - `cancion_2_segundos`: 200
+  - `cancion_3_segundos`: 200
+- **Resultado esperado:**
+  - `Estado de Integridad: ADVERTENCIA: ERROR DE DESFASE (TIEMPO)`
+  - `Dictamen del Sistema: La suma real da 600s, pero el encabezado afirma tener 500s.`
+  *(Muestra la eficacia del aislamiento analítico: el contador de pistas es correcto, pero el interruptor de inconsistencia cronológica detecta el desfase con exactitud).*
+
+## Explicacion final
+
+Mi solución funciona de manera eficiente porque implementa el principio de desacoplamiento lógico mediante banderas de error (*Error Flags*). En lugar de evaluar complejas fórmulas aritméticas directamente dentro de las instrucciones de control `if`, el sistema calcula primero las variables booleanas de desigualdad (`inconsistencia_contador` e `inconsistencia_tiempo`). Esto permite que el motor de diagnóstico condicional actúe como una tabla de verdad limpia: evalúa primero la falla total combinada con el operador `and` y luego desglosa cada anomalía de manera atómica por descarte descendente. De esta manera, el programa asegura que se emita un reporte preciso sin riesgo de solapamientos lógicos o falsos aprobados.
+
+## Sugerencia
+
+Convierte cada regla del problema en una condicion clara antes de programar.
