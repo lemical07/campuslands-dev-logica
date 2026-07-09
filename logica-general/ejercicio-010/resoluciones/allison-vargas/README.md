@@ -47,4 +47,4 @@ JSON
   "motivo": "Instrucción incumplida: Los vuelos internacionales exigen una póliza de seguro médico activa."
 }
 Explicacion final
-La solución es efectiva porque aborda el análisis de reglas de negocio mediante condicionales jerárquicos y el uso de variables booleanas explícitas (tienePasaporte, destinoInternacional). Al estructurar la lógica con retornos rápidos (early returns), evitamos que un pasajero sin pasaporte avance a evaluar cláusulas secundarias como el seguro, modelando fielmente un puesto de control real en un aeropuerto y garantizando un código óptimo, robusto y fácil de auditar.
+La solución es efectiva porque aborda el análisis de reglas de negocio mediante condicionales jerárquicos y el uso de variables booleanas explícitas (tienePasaporte, destinoInternacional). Al estructurar la lógica con retornos rápidos (early returns), evitamos que un pasajero sin pasaporte avance a evaluar cláusulas secundarias como el seguro, modelando fielmente un puesto de control real en un aeropuerto y garantizando un código óptimo, robusto.
