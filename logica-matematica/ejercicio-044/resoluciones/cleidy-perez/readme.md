@@ -1,4 +1,4 @@
-# Lógica matemática 024 - rangos y maximos
+# Lógica matemática 044 - rangos y maximos
 
 ## Entrada:
 Un arreglo con el inventario de motos que contiene la marca, modelo y cilindraje.
