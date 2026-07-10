@@ -1,6 +1,6 @@
 # Lógica matemática 044 - rangos y maximos
 
-## Entrada:
+## Entrada;
 Un arreglo con el inventario de motos que contiene la marca, modelo y cilindraje.
 
 ## Proceso:
