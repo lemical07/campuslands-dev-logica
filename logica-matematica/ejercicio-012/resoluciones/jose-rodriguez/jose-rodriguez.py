@@ -30,18 +30,18 @@ if __name__ == "__main__":
         
         # Validaciones de consistencia de magnitudes lógicas
         if favorables < 0 or totales < 0:
-            print("\n Error: No se admiten registros estadísticos negativos.")
+            print("\n⚠️ Error: No se admiten registros estadísticos negativos.")
         elif favorables > totales:
-            print("\nError lógico: Los casos favorables no pueden exceder el universo de saques.")
+            print("\n⚠️ Error lógico: Los casos favorables no pueden exceder el universo de saques.")
         else:
             # Procesamiento de la solución estructurada
             porcentaje, diagnostico, aprobado = calcular_probabilidad_servicio(favorables, totales)
             
             print("\n=============================================")
-            print("BALANCE PROBABILÍSTICO DE SERVICIO:")
+            print("🏓 BALANCE PROBABILÍSTICO DE SERVICIO:")
             print(f"-> Probabilidad empírica de éxito: {porcentaje}%")
             print(f"-> Diagnóstico técnico: {diagnostico}")
             print("=============================================")
             
     except ValueError:
-        print("\nError: Por favor, introduce únicamente números enteros en la terminal.")
+        print("\n⚠️ Error: Por favor, introduce únicamente números enteros en la terminal.")
