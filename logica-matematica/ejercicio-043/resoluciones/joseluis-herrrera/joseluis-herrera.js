@@ -26,4 +26,4 @@ if (jugadores.length === 0) {
         let resultado = analizarRendimiento(jugador);
         console.log(`Jugador ${jugador.nombre}: ${resultado}`);
     });
-}
+}   
