@@ -32,4 +32,4 @@
 
 ## Explicacion final
 
-La idea aquí es que no se nos escape nada en la tienda. Si algo está bloqueado, hay que ponerle el atención rápido para que todo siga funcionando bien y no tengamos problemas con los productos de las mascotas.
+La idea aquí es que no se nos escape nada en la playlist. Si alguna canción o archivo está bloqueado, hay que ponerle atención rápido para que la música siga sonando sin problemas y todo esté en orden.
