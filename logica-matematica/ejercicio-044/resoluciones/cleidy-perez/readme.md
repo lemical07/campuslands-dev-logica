@@ -17,7 +17,6 @@ Un arreglo vacío (`[]`).
 ### Resultado esperado:
 Se muestra el mensaje **"No hay motos registradas."**# Explicación finalLa solución funciona porque primero verifica que existan motos registradas. Después utiliza un filtro para seleccionar las motos dentro del rango establecido y un ciclo para comparar los cilindrajes hasta encontrar la moto con el valor máximo.
 # Sugerencia
-=======
 # Lógica matemática 044 - rangos y maximos
 
 ## Entrada;
