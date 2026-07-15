@@ -2,43 +2,35 @@
 
 ## Analisis
 
-* **Entrada:** Un arreglo de números (`puntajesCrudos`), un número (`puntajeMaximo`) y un número para el ajuste de calibración.
-* **Proceso:** Normalizar cada valor a una escala de 0-100 aplicando la fórmula $\frac{puntaje}{maximo} \times 100$, sumar el ajuste, aplicar "clamping" para mantener los valores entre 0 y 100, y asignar una categoría (Certificado, Aprobado o Reprobado) según el resultado.
-* **Salida:** Un arreglo de objetos conteniendo el puntaje original, el puntaje final calculado y su clasificación de calidad.
+* **Entrada**: Un arreglo `operarios` (objetos con `nombre`, `experiencia` y `estaDisponible`) y un string `urgencia` ("Alta" o "Baja").
+* **Proceso**: Filtrado de personal apto, ordenamiento dinámico basado en criterios de experiencia según la urgencia, y selección del candidato superior.
+* **Salida**: Un objeto que indica el nombre del `operario` asignado y el `motivo` de la decisión (basado en su nivel de experiencia).
 
 ## Reglas identificadas
 
-1. **Normalización:** El puntaje base se convierte a base 100 mediante la proporción respecto al máximo.
-2. **Restricción (Clamping):** El resultado final no puede ser menor a 0 ni mayor a 100, independientemente del ajuste.
-3. **Clasificación:**
-* $\ge 90$: "Certificado".
-* $\ge 70$: "Aprobado".
-* $< 70$: "Reprobado".
-
-
+1. Solo se consideran para la asignación los operarios con la propiedad `estaDisponible` en `true`.
+2. Si ningún operario está disponible, se debe retornar un mensaje indicando que no hay personal.
+3. Si la urgencia es "Alta", se prioriza al operario con mayor experiencia; si es "Baja", al de menor experiencia.
 
 ## Pruebas
 
 ### Caso normal
 
-**Entrada:**
-`puntajes: [80, 70], max: 100, ajuste: 5`
-
-**Resultado esperado:**
-`[{original: 80, final: "85.00", clasificacion: "Aprobado"}, {original: 70, final: "75.00", clasificacion: "Aprobado"}]`
+* **Entrada**: `personal = [{nombre: "Ana", experiencia: 9, estaDisponible: true}, {nombre: "Luis", experiencia: 3, estaDisponible: true}], "Alta"`
+* **Resultado esperado**: `{ operario: "Ana", motivo: "Asignado por criterio de urgencia Alta (Experiencia: 9)." }`
 
 ### Caso borde
 
-**Entrada:**
-`puntajes: [10], max: 100, ajuste: -20`
-
-**Resultado esperado:**
-`[{original: 10, final: "0.00", clasificacion: "Reprobado"}]`
+* **Entrada**: `personal = [{nombre: "Ana", experiencia: 9, estaDisponible: false}], "Alta"`
+* **Resultado esperado**: `{ operario: "Ninguno", motivo: "No hay personal disponible para el turno." }`
 
 ## Explicacion final
 
-La solución funciona porque utiliza el método `.map()` para transformar los datos de forma inmutable, asegurando que cada puntaje individual pase por un proceso de limpieza. Al integrar `Math.max(0, Math.min(100, final))`, evitamos errores de lógica donde una calibración excesiva pudiera arrojar valores fuera de la escala lógica, garantizando que el sistema de control de calidad sea siempre consistente.
+La solución funciona mediante una estrategia de dos pasos. Primero, aislamos los datos relevantes eliminando a los operarios que no pueden trabajar. Segundo, aprovechamos la flexibilidad del método `.sort()` para aplicar una lógica de ordenamiento condicional que se adapta instantáneamente al valor de la variable `urgencia`. Esto nos permite elegir siempre al candidato ideal para la situación específica sin necesidad de bloques de código repetitivos, garantizando que el sistema sea eficiente y fácil de escalar si se añadieran nuevos niveles de urgencia en el futuro.
 
 ## Sugerencia
 
-Convierte cada regla del problema en una condicion clara antes de programar. En este caso, divide la lógica en: primero normalizar, segundo ajustar, tercero limitar, y cuarto clasificar; esto facilitará enormemente el *debugging* si algún resultado no es el esperado.
+Verifica cada operacion con calculos manuales antes de confiar en el codigo:
+
+* **Ejemplo manual (Urgencia Alta)**: Ana (exp 9) vs Luis (exp 3). Orden descendente $\rightarrow$ Ana (9) es la primera.
+* **Ejemplo manual (Urgencia Baja)**: Ana (exp 9) vs Luis (exp 3). Orden ascendente $\rightarrow$ Luis (3) es el primero.
