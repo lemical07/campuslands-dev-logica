@@ -1,4 +1,4 @@
-# Lógica matemática 044 
+# Lógica matemática 064 
 - rangos y maximos
 ## Entrada:
 Un arreglo con el inventario de motos que contiene la marca, modelo y cilindraje.## Proceso:Se valida que el arreglo tenga datos. Luego se filtran las motos con un cilindraje entre 200 cc y 400 cc. Después se recorre el inventario para encontrar la moto con el mayor cilindraje.
