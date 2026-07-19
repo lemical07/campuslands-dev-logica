@@ -73,4 +73,4 @@ La solución funciona porque utiliza una **matriz simple**, donde cada fila alma
 
 ## Sugerencia
 
-Cuando trabajes con matrices simples, identifica qué representa cada fila y cada columna antes de programar. Luego utiliza un ciclo para recorrer la matriz y acceder a cada posición mediante sus índices (`fila` y `columna`), facilitando la lectura y organización de la información.
+cuando trabajes con matrices simples, identifica qué representa cada fila y cada columna antes de programar. Luego utiliza un ciclo para recorrer la matriz y acceder a cada posición mediante sus índices (`fila` y `columna`), facilitando la lectura y organización de la información.
